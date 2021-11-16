@@ -5,14 +5,20 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <div id="navbar"> 
-            <ul> 
-              <li><a href="http://github.com">Link 1</a></li> 
-              <li><a href="http://github.com">Link 2</a></li> 
-              <li><a href="http://github.com">Link 3</a></li> 
-              <li><a href="http://github.com">Link 4</a></li> 
-              <li><a href="http://github.com">Link 5</a></li> 
-            </ul> 
-          </div>
+        <div id="capcha">
+            <div class="center">
+                <h1 id="captchaHeading">Captcha Validator</h1>
+                    <div id="captchaBackground">
+                        <canvas id="captcha">captcha text</canvas>
+                        <input id="textBox" type="text" name="text">
+                     <div id="buttons">
+                        <input id="submitButton" type="submit">
+                        <button id="refreshButton" type="submit">Refresh</button>
+                    </div>
+                    <span id="output"></span>
+                </div>
+            </div>
+            <script src="js/script.js"></script>
+        </div>
     </body>
 </html>

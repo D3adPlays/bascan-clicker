@@ -2,6 +2,7 @@
 var theme = 1;                                                      // Theme sombre=0   Theme clair=1
 
 var captcha;                                                        // Deffinition du captcha
+var server = "localhost";
 
 var onloadCallback = function() {
     if(theme==0){                                                   // Si le theme est strictement égal a 0 (theme sombre)
@@ -31,7 +32,7 @@ var verifyCallback = function(response) {
     console.log("====================  END TOKEN  ====================")
     fadeOutEffect("login");
     window.open("https://www.google.com/recaptcha/api/siteverify?secret=6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n&response=" + encodeURIComponent(response)); */
-    
+
 };
 
 function replaceContentInContainer(target, source) {
@@ -50,3 +51,8 @@ function fadeOutEffect(target) {
         }
     }, 2);
 };
+
+function login(resonse){
+    fadeOutEffect("login");
+    
+}

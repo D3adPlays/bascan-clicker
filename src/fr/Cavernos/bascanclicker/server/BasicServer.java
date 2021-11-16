@@ -48,7 +48,12 @@ public class BasicServer {
 			public void handle(HttpExchange httpExchange) throws IOException {
 				StringBuilder response = new StringBuilder();
 				 Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
-				 response.append("https://www.google.com/recaptcha/api/siteverify?secret=6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n?response=" + parms.get("key"));
+				 JsonReader.main(parms.get("key"));
+				 if(JsonReader.main(parms.get("key"))){
+					 response.append("success");
+				 } else {
+					 response.append("400");
+				 }
 				BasicServer.writeResponse(httpExchange, response.toString());
 			}
 			  

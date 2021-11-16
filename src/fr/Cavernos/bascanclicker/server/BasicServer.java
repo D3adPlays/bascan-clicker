@@ -16,6 +16,7 @@ public class BasicServer {
 		    HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 		    server.createContext("/info", new InfoHandler());
 		    server.createContext("/get", new GetHandler());
+		    server.createContext("/set", new VerifyCaptcha());
 		    server.setExecutor(null); // creates a default executor
 		    server.start();
 		    System.out.println("The server is running");
@@ -39,6 +40,16 @@ public class BasicServer {
 		      response.append("</body></html>");
 		      BasicServer.writeResponse(httpExchange, response.toString());
 		    }
+		  }
+		  
+		  static class VerifyCaptcha implements HttpHandler {
+			public void handle(HttpExchange httpExchange) throws IOException {
+				StringBuilder response = new StringBuilder();
+				 Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
+				response.append("https://www.google.com/recaptcha/api/siteverify?secret=" + parms.get("6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n" + "response=" + parms.get("03AGdBq25jVcrRziEKsV2hH6Mx3amSiJxFAh-Qc87teIYt9g6suuo6Pj3u77J2FlsG54eIjYgM68BdfA4k-M56flegPztuNSaG8oTB44Fl6YbViXvY72PQR8OJ3CAAt-kTSthi-HAeeeyNLBjQdI49Zi7Y_kkvCPdSYQWj9V1hKLeec06gtSlG3SPoR-zvUiFl9PIchytF5FkY6nI7Q9_Oxc1TFdpPvcIKG8tvYWdiPukwa2Sx5juyALkdiaLwOl85215Jpa0tLCqS8UOVxOKFNcQSMPzzubjHAANpuT8M9eAJpKHY4aamjg7kuLFAVGKIs5xjC9C5_wURbzZQS3rKD3_-VI7VHz-9lFbX8gJXmVsGslTakNV7sSYDvKpjYtmiqGkLruzl9g5iCPZmla3KIHUp1bTIROWUW4O8wSLziB2jg-slxGJp4pFW5H2DVlo-i0MLkSWYksVfxZ0LjRMtQII32oxqvm9r2h7Lb6r_rEUHIFxCfm3dvSqsJc1OLzHSC4KLOUN6YXIa")));
+				BasicServer.writeResponse(httpExchange, response.toString());
+			}
+			  
 		  }
 
 		public static void writeResponse(HttpExchange httpExchange, String response) throws IOException {

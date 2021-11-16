@@ -3,22 +3,9 @@
     <head>
         <title>Bascan clicker !</title>
         <link rel="stylesheet" href="/css/style.css">
+        <script src="https://www.google.com/recaptcha/api.js"></script>
     </head>
     <body>
-        <div id="capcha">
-            <div class="center">
-                <h1 id="captchaHeading">Captcha Validator</h1>
-                    <div id="captchaBackground">
-                        <canvas id="captcha">captcha text</canvas>
-                        <input id="textBox" type="text" name="text">
-                     <div id="buttons">
-                        <input id="submitButton" type="submit">
-                        <button id="refreshButton" type="submit">Refresh</button>
-                    </div>
-                    <span id="output"></span>
-                </div>
-            </div>
-            <script src="js/script.js"></script>
-        </div>
+        <div class="g-recaptcha" data-sitekey="YOUR_KEY" data-callback="correctCaptcha"></div>
     </body>
 </html>

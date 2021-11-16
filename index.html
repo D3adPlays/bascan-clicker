@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Bascan clicker !</title>
-        <link rel="stylesheet" href="/css/style.css">
-        <script src="https://www.google.com/recaptcha/api.js"></script>
-    </head>
-    <body>
-        <div class="g-recaptcha" data-sitekey="YOUR_KEY" data-callback="correctCaptcha"></div>
-    </body>
+  <head>
+    <title>Bascan click</title>
+    <script src="js/script.js"></script> <!-- Lance le script Js dans le répertoire js/script.js contenant la logique le la page web -->
+    <link rel="stylesheet" href="css/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="login" id="login">
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+              <!-- Tabs Titles -->
+          
+              <!-- Icon -->
+              <div class="fadeIn first">
+                <img src="img/logo.png" id="icon" alt="User Icon" />
+              </div>
+          
+              <!-- Login Form -->
+              <form>
+                <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+                <div id="captcha" class="fadeIn third"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
+                <input type="submit" class="fadeIn fourth" value="Log In">
+              </form>
+            </div>
+          </div>
+    </div>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+    </script>
+  </body>
 </html>

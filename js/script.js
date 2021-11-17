@@ -21,7 +21,6 @@ var onloadCallback = function() {
 };
 
 window.onload = function() {
-    yourFunction(param1, param2);
 };
 
 var verifyCallback = function(response) {
@@ -32,7 +31,7 @@ var verifyCallback = function(response) {
     console.log("====================  END TOKEN  ====================")
     fadeOutEffect("login");
     window.open("https://www.google.com/recaptcha/api/siteverify?secret=6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n&response=" + encodeURIComponent(response)); */
-
+    window.open("localhost:8080/getToken?key=" + response);
 };
 
 function replaceContentInContainer(target, source) {
@@ -53,6 +52,7 @@ function fadeOutEffect(target) {
 };
 
 function login(resonse){
-    fadeOutEffect("login");
-    
+    if(captcha != null && document.getElementById("loginfeild").value != null){
+        fadeOutEffect("login");  
+    }
 }

@@ -25,7 +25,7 @@ window.onload = function() {
 };
 
 var verifyCallback = function(response) {
-    //window.open("localhost:8080/getToken?key=" + response);
+    //window.location.replace("http://localhost:8080/getToken?key=" + response);
 };
 
 function replaceContentInContainer(target, source) {

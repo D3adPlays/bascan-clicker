@@ -37,12 +37,7 @@ public class JsonReader {
 	  }
 
 	  public static Boolean main(String url) throws IOException, JSONException {
-	    JSONObject json = readJsonFromUrl("https://www.google.com/recaptcha/api/siteverify?secret=6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n&response=" + url);
-	    if (json.get("success").equals("true")){
-	    	return true;
-	    }
-	    else {
-	    	return false;
-	    }
+		JSONObject json = readJsonFromUrl("https://www.google.com/recaptcha/api/siteverify?secret=" + BasicServer.serverKey + "&response=" + url);
+		return json.getBoolean("success");
 	  }
 	}

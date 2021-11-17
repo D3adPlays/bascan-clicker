@@ -3,8 +3,13 @@ package fr.Cavernos.bascanclicker.server;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -12,45 +17,39 @@ import com.sun.net.httpserver.HttpServer;
 
 public class BasicServer {
 	
+	public final static String serverKey = "6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n";
+	public final static String serverToken = UUID.randomUUID().toString();
 
 
 	  public static void main(String[] args) throws Exception {
 		    HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-		    server.createContext("/info", new InfoHandler());
-		    server.createContext("/get", new GetHandler());
-		    server.createContext("/set", new VerifyCaptcha());
+		    server.createContext("/getToken", new VerifyCaptcha());
+		    server.createContext("/", new landingpane());
 		    server.setExecutor(null); // creates a default executor
 		    server.start();
 		    System.out.println("The server is running");
 		  }
 
-		  // http://localhost:8000/info
-		  static class InfoHandler implements HttpHandler {
-		    public void handle(HttpExchange httpExchange) throws IOException {
-		      String response = "Use /get?hello=word&foo=bar to see how to handle url parameters";
-		      BasicServer.writeResponse(httpExchange, response.toString());
-		    }
-		  }
-
-		  static class GetHandler implements HttpHandler {
-		    public void handle(HttpExchange httpExchange) throws IOException {
-		      StringBuilder response = new StringBuilder();
-		      Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
-		      response.append("<html><body>");
-		      response.append("hello : " + parms.get("hello") + "<br/>");
-		      response.append("foo : " + parms.get("foo") + "<br/>");
-		      response.append("</body></html>");
-		      BasicServer.writeResponse(httpExchange, response.toString());
-		    }
-		  }
-		  
 		  static class VerifyCaptcha implements HttpHandler {
 			public void handle(HttpExchange httpExchange) throws IOException {
 				StringBuilder response = new StringBuilder();
 				 Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
+				 System.out.println(JsonReader.main(parms.get("key")));
 				 JsonReader.main(parms.get("key"));
-				 if(JsonReader.main(parms.get("key"))){
-					 response.append("success");
+				if(Boolean.TRUE){
+					 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
+					 Key aesKey = new SecretKeySpec(serverKey.getBytes(), "AES");
+			         Cipher cipher;
+					try {
+						cipher = Cipher.getInstance("AES");
+						cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+						 byte[] encrypted;
+						 encrypted = cipher.doFinal(cookie.getBytes());
+						 System.err.println(new String(encrypted));
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
 				 } else {
 					 response.append("400");
 				 }
@@ -58,6 +57,13 @@ public class BasicServer {
 			}
 			  
 		  }
+		  
+		  static class landingpane implements HttpHandler {
+			    public void handle(HttpExchange httpExchange) throws IOException {
+			      String response = "Arrete de regarder notre code petit coquin ;)" ;
+			      BasicServer.writeResponse(httpExchange, response.toString());
+			    }
+			  }
 
 		public static void writeResponse(HttpExchange httpExchange, String response) throws IOException {
 			 httpExchange.sendResponseHeaders(200, response.length());

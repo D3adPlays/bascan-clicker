@@ -1,7 +1,7 @@
 
 var theme = 1;                                                      // Theme sombre=0   Theme clair=1
 
-var captcha;                                                        // Deffinition du captcha
+var captcha = "null";                                                        // Deffinition du captcha
 var server = "localhost";
 
 var onloadCallback = function() {
@@ -21,17 +21,11 @@ var onloadCallback = function() {
 };
 
 window.onload = function() {
+    document.getElementById("")
 };
 
 var verifyCallback = function(response) {
-    /* console.log("Captcha reussi !")
-    console.log("==================== BEGIN TOKEN ====================")
-    console.log(response);
-    console.log("https://www.google.com/recaptcha/api/siteverify?secret=6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n&response=" + encodeURIComponent(response));
-    console.log("====================  END TOKEN  ====================")
-    fadeOutEffect("login");
-    window.open("https://www.google.com/recaptcha/api/siteverify?secret=6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n&response=" + encodeURIComponent(response)); */
-    window.open("localhost:8080/getToken?key=" + response);
+    //window.open("localhost:8080/getToken?key=" + response);
 };
 
 function replaceContentInContainer(target, source) {
@@ -51,8 +45,10 @@ function fadeOutEffect(target) {
     }, 2);
 };
 
-function login(resonse){
-    if(captcha != null && document.getElementById("loginfeild").value != null){
-        fadeOutEffect("login");  
+function login(){
+    if(captcha != "null"){
+        fadeOutEffect("login"); 
+    } else {
+        fadeOutEffect("login");
     }
 }

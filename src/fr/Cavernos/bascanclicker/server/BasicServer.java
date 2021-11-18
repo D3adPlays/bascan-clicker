@@ -21,8 +21,8 @@ import com.sun.net.httpserver.HttpServer;
 
 public class BasicServer {
 	
-	public final static String serverKey = "6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n";
-	public final static String serverToken = UUID.randomUUID().toString();
+	public static final String serverKey = "6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n";
+	public static final String serverToken = UUID.randomUUID().toString();
 	public static SecretKeySpec secretKey;
 	public static final String ALGORITHM = "AES";
 
@@ -30,6 +30,7 @@ public class BasicServer {
 	  public static void main(String[] args) throws Exception {
 		    HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 		    server.createContext("/getToken", new VerifyCaptcha());
+		    server.createContext("/count", new Counter());
 		    server.createContext("/", new landingpage());
 		    server.setExecutor(null); // creates a default executor
 		    server.start();
@@ -42,7 +43,8 @@ public class BasicServer {
 				 Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
 				if(JsonReader.main(parms.get("key"))){
 					 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
-					 System.out.println(encrypt(cookie, serverKey));
+					 response.append(encrypt(cookie + serverToken, serverKey));
+					 response.append(decrypt(cookie, serverKey));
 				 } else {
 					 response.append("400");
 				 }

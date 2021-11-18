@@ -3,7 +3,11 @@ package fr.Cavernos.bascanclicker.server;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.security.Key;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -19,12 +23,14 @@ public class BasicServer {
 	
 	public final static String serverKey = "6Ld1iTsdAAAAAIVUgfanoRz_nmCCnez_pWKVcz9n";
 	public final static String serverToken = UUID.randomUUID().toString();
+	public static SecretKeySpec secretKey;
+	public static final String ALGORITHM = "AES";
 
 
 	  public static void main(String[] args) throws Exception {
 		    HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 		    server.createContext("/getToken", new VerifyCaptcha());
-		    server.createContext("/", new landingpane());
+		    server.createContext("/", new landingpage());
 		    server.setExecutor(null); // creates a default executor
 		    server.start();
 		    System.out.println("The server is running");
@@ -34,22 +40,10 @@ public class BasicServer {
 			public void handle(HttpExchange httpExchange) throws IOException {
 				StringBuilder response = new StringBuilder();
 				 Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
-				 System.out.println(JsonReader.main(parms.get("key")));
-				 JsonReader.main(parms.get("key"));
-				if(Boolean.TRUE){
+				if(JsonReader.main(parms.get("key"))){
 					 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
-					 Key aesKey = new SecretKeySpec(serverKey.getBytes(), "AES");
-			         Cipher cipher;
-					try {
-						cipher = Cipher.getInstance("AES");
-						cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-						 byte[] encrypted;
-						 encrypted = cipher.doFinal(cookie.getBytes());
-						 System.err.println(new String(encrypted));
-					}
-					catch (Exception e) {
-						e.printStackTrace();
-					}
+					 encrypt(cookie, serverKey);
+					 System.out.println(cookie);
 				 } else {
 					 response.append("400");
 				 }
@@ -58,7 +52,7 @@ public class BasicServer {
 			  
 		  }
 		  
-		  static class landingpane implements HttpHandler {
+		  static class landingpage implements HttpHandler {
 			    public void handle(HttpExchange httpExchange) throws IOException {
 			      String response = "Arrete de regarder notre code petit coquin ;)" ;
 			      BasicServer.writeResponse(httpExchange, response.toString());
@@ -84,6 +78,42 @@ public class BasicServer {
 		        }
 		    }
 		    return result;
+		}
+		public static String decrypt(String strToDecrypt, String secret) {
+			try {
+				prepareSecreteKey(secret);
+				Cipher cipher = Cipher.getInstance(ALGORITHM);
+				cipher.init(Cipher.DECRYPT_MODE, secretKey);
+				return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+			} catch (Exception e) {
+				System.out.println("Error while decrypting: " + e);
+			}
+			return null;
+		}
+
+		public static String encrypt(String strToEncrypt, String secret) {
+			try {
+				prepareSecreteKey(secret);
+				Cipher cipher = Cipher.getInstance(ALGORITHM);
+				cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+				return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
+			} catch (Exception e) {
+				System.out.println("Error while encrypting: " + e);
+			}
+			return null;
+		}
+
+		public static void prepareSecreteKey(String myKey) {
+			MessageDigest sha;
+			try {
+				byte[] key = myKey.getBytes(StandardCharsets.UTF_8);
+				sha = MessageDigest.getInstance("SHA-1");
+				key = sha.digest(key);
+				key = Arrays.copyOf(key, 16);
+				secretKey = new SecretKeySpec(key, ALGORITHM);
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
 		}
 }
 	

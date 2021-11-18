@@ -9,14 +9,14 @@ return:
 ```
 	private static SecretKeySpec secretKey;
 	private static final String ALGORITHM = "AES";
-    	public static String decrypt(String strToDecrypt, String secret) {
+    		public static String decrypt(String strToDecrypt, String secret) {
 		try {
 			prepareSecreteKey(secret);
 			Cipher cipher = Cipher.getInstance(ALGORITHM);
 			cipher.init(Cipher.DECRYPT_MODE, secretKey);
 			return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
 		} catch (Exception e) {
-			System.out.println("Error while decrypting: " + e.toString());
+			System.out.println("Error while decrypting: " + e);
 		}
 		return null;
 	}
@@ -26,17 +26,17 @@ return:
 			prepareSecreteKey(secret);
 			Cipher cipher = Cipher.getInstance(ALGORITHM);
 			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-			return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+			return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
 		} catch (Exception e) {
-			System.out.println("Error while encrypting: " + e.toString());
+			System.out.println("Error while encrypting: " + e);
 		}
 		return null;
 	}
 
 	public static void prepareSecreteKey(String myKey) {
-		MessageDigest sha = null;
+		MessageDigest sha;
 		try {
-			key = myKey.getBytes(StandardCharsets.UTF_8);
+			byte[] key = myKey.getBytes(StandardCharsets.UTF_8);
 			sha = MessageDigest.getInstance("SHA-1");
 			key = sha.digest(key);
 			key = Arrays.copyOf(key, 16);
@@ -45,5 +45,4 @@ return:
 			e.printStackTrace();
 		}
 	}
-}
 ```

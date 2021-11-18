@@ -11,7 +11,7 @@ public class Counter implements HttpHandler{
 		StringBuilder response = new StringBuilder();
 		Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
 		String cookie = httpExchange.getRemoteAddress().getAddress().toString();
-		if (parms.get("count") + BasicServer.decrypt(cookie , BasicServer.serverKey) != null) {
+		if (parms.get("count") + BasicServer.decrypt(cookie, BasicServer.serverKey) != null) {
 			response.append("yes");
 		}
 		

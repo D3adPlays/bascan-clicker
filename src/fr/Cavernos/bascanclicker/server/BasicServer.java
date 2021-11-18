@@ -44,7 +44,7 @@ public class BasicServer {
 				if(JsonReader.main(parms.get("key"))){
 					 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
 					 response.append(encrypt(cookie + serverToken, serverKey));
-					 response.append(decrypt(cookie, serverKey));
+					 System.out.println(decrypt(cookie, serverKey));
 				 } else {
 					 response.append("400");
 				 }
@@ -85,7 +85,7 @@ public class BasicServer {
 				prepareSecreteKey(secret);
 				Cipher cipher = Cipher.getInstance(ALGORITHM);
 				cipher.init(Cipher.DECRYPT_MODE, secretKey);
-				return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+				return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt.getBytes(StandardCharsets.UTF_8))));
 			} catch (Exception e) {
 				System.out.println("Error while decrypting: " + e);
 			}

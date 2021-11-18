@@ -18,10 +18,10 @@ var onloadCallback = function() {
             'theme' : 'light'                                           // Mettre le theme en theme sombre
           });
     }
-};
+}; //<div id="captcha" class="fadeIn third"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
 
 window.onload = function() {
-    document.getElementById("")
+    document.getElementById()
 };
 
 var verifyCallback = function(response) {

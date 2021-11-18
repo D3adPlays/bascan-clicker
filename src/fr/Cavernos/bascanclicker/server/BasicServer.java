@@ -43,8 +43,8 @@ public class BasicServer {
 				 Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
 				if(JsonReader.main(parms.get("key"))){
 					 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
-					 response.append(encrypt(cookie + serverToken, serverKey));
-					 System.out.println(decrypt(cookie, serverKey));
+					 String encryptKey = encrypt(cookie + serverToken, serverKey);
+					 response.append(decrypt(encryptKey, serverKey));
 				 } else {
 					 response.append("400");
 				 }

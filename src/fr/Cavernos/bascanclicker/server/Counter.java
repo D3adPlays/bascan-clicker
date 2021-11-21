@@ -10,12 +10,19 @@ public class Counter implements HttpHandler{
 	public void handle(HttpExchange httpExchange) throws IOException {
 		StringBuilder response = new StringBuilder();
 		Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
-		String cookie = httpExchange.getRemoteAddress().getAddress().toString();
-		String encryptKey = BasicServer.encrypt(cookie + BasicServer.serverToken, BasicServer.serverKey);
-		if (parms.get("count") + BasicServer.decrypt(encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverKey) != null) {
-			response.append("yes");
-		}
-		
+		if(JsonReader.main(parms.get("count"))){
+			String cookie = httpExchange.getRemoteAddress().getAddress().toString();
+			String encryptKey = BasicServer.encrypt(cookie + BasicServer.serverToken, BasicServer.serverKey);
+			if(BasicServer.decrypt(encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverToken)){
+				
+			} else{
+				response.append("200");
+			}
+				
+		 } else {
+			 response.append("400");
+		 }
+		BasicServer.writeResponse(httpExchange, response.toString());
 	}
 
 }

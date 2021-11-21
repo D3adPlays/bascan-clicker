@@ -1,5 +1,6 @@
 package fr.Cavernos.bascanclicker.server;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
@@ -14,7 +15,13 @@ public class Counter implements HttpHandler{
 			String cookie = httpExchange.getRemoteAddress().getAddress().toString();
 			String encryptKey = BasicServer.encrypt(cookie + BasicServer.serverToken, BasicServer.serverKey);
 			if(BasicServer.decrypt(encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverToken)){
+				response.append("File is Writed");
+				@SuppressWarnings("resource")
+				FileWriter test = new FileWriter("counter.txt");
+				test.write("1");
+				test.flush();
 				
+			
 			} else{
 				response.append("200");
 			}

@@ -19,10 +19,38 @@ var onloadCallback = function() {
             'theme' : 'light'                                           // Mettre le theme en theme sombre
           });
     }
+<<<<<<< HEAD
 };
 var verifyCallback = function(response) {
     captcha = response;
     accestoken = httpGet("http://77.206.85.165:8080/getToken?key=" + captcha);
+=======
+}; //<div id="captcha" class="fadeIn third"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
+
+window.onload = function() {
+    document.getElementById()
+};
+
+var verifyCallback = function(response) {
+    //window.location.replace("http://localhost:8080/getToken?key=" + response);
+};
+
+function replaceContentInContainer(target, source) {
+    document.getElementById(target).innerHTML = document.getElementById(source).innerHTML;
+};
+function fadeOutEffect(target) {
+    var fadeTarget = document.getElementById(target);
+    var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity > 0) {
+            fadeTarget.style.opacity -= 0.01;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 2);
+>>>>>>> b3399d12e16017cf7ba3560ccbf4241dd698b1ae
 };
 
 function pullToken(){

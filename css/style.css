@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i|Monoton');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
@@ -303,3 +304,80 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-transform: scale(1);
   }
 }
+=======
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+  background-image: url('../img/backgroud.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  font-family: 'Numans', sans-serif;
+}
+
+.captcha{
+  height: 100%;
+  align-content: center;
+}
+
+.container{
+  height: 100%;
+  align-content: center;
+}
+
+.card{
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0,0,0,0.5) !important;
+}
+
+.social_icon span{
+  font-size: 60px;
+  margin-left: 10px;
+  color: #128d16;
+}
+
+.social_icon span:hover{
+  color: white;
+  cursor: pointer;
+}
+
+.card-header h3{
+  color: white;
+}
+
+.social_icon{
+  position: absolute;
+  right: 20px;
+  top: -45px;
+}
+
+.input-group-prepend span{
+  width: 50px;
+  background-color: #128d16;
+  color: black;
+  border:0 !important;
+}
+
+input:focus{
+  outline: 0 0 0 0  !important;
+  box-shadow: 0 0 0 0 !important;
+}
+.login_btn{
+color: black;
+background-color: #128d16;
+width: 100px;
+}
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+.links{
+color: white;
+}
+.links a{
+margin-left: 4px;
+}
+>>>>>>> b3399d12e16017cf7ba3560ccbf4241dd698b1ae

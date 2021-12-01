@@ -1,30 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bascan click</title>
-    <script src="js/script.js"></script> <!-- Lance le script Js dans le répertoire js/script.js contenant la logique le la page web -->
-    <link rel="stylesheet" href="css/style.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <div class="login" id="login">
-        <div class="wrapper fadeInDown">
-            <div id="formContent">
-              <div class="fadeIn first">
-                <img src="img/logo.png" id="icon" alt="User Icon" />
-              </div>
-              <form>
-                <input type="text" id="loginfeild" class="fadeIn second" name="login" placeholder="login">
-                <div id="captcha" class="fadeIn third"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
-                <input type="button" class="fadeIn fourth" value="Log In" onclick="login()">
-              </form>
+<head>
+  <title>BASCLICK</title>
+  <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
+  <link rel="icon" href="img/logo.png">
+  
+  <meta charset="utf-8">
+</head>
+<body>
+  <div class="tile">
+    <div class="tile-header">
+      <h2 style="color: rgb(6, 143, 36); opacity: 1; font-size: 4rem; display: flex; justify-content: center; align-items: center; height: 100%;">BASCLICK</h2>
+    </div>
+    
+    <div class="tile-body">
+      <form id="form">
+        <label class="form-input">
+          <i class="material-icons">person</i>
+          <input type="text" autofocus="true" required />
+          <span class="label">Pseudo</span>
+          <span class="underline"></span>
+        </label>
+        
+        <label class="form-input">
+          <div id="captcha"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
+        </label>
+        
+        <div class="submit-container clearfix" style="margin-top: 2rem;">          
+          <div id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0" onclick="pullToken(); window.location.href='/play/index.html'">
+            <span>Se connecter
+            </span>
+          </div>
+          
+          <div class="login-pending">
+            <div class=spinner>
+              <span class="dot1"></span>
+              <span class="dot2"></span>
+            </div>
+            
+            <div class="login-granted-content">
+              <i class="material-icons">done</i>
             </div>
           </div>
+        </div>
+      </form>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-        async defer>
-    </script>
-  </body>
+  </div>
+  <script src='js/script.js'></script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
+</body>
 </html>

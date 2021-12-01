@@ -1,7 +1,8 @@
 
 var theme = 1;                                                      // Theme sombre=0   Theme clair=1
 
-var captcha = "null";                                                        // Deffinition du captcha
+var captcha = "null";
+var accestoken = "null";                                                     // Deffinition du captcha
 var server = "localhost";
 
 var onloadCallback = function() {
@@ -19,36 +20,50 @@ var onloadCallback = function() {
           });
     }
 };
-
-window.onload = function() {
-    document.getElementById("")
-};
-
 var verifyCallback = function(response) {
-    //window.open("localhost:8080/getToken?key=" + response);
+    captcha = response;
+    accestoken = httpGet("http://77.206.85.165:8080/getToken?key=" + captcha);
 };
 
-function replaceContentInContainer(target, source) {
-    document.getElementById(target).innerHTML = document.getElementById(source).innerHTML;
-};
-function fadeOutEffect(target) {
-    var fadeTarget = document.getElementById(target);
-    var fadeEffect = setInterval(function () {
-        if (!fadeTarget.style.opacity) {
-            fadeTarget.style.opacity = 1;
-        }
-        if (fadeTarget.style.opacity > 0) {
-            fadeTarget.style.opacity -= 0.01;
-        } else {
-            clearInterval(fadeEffect);
-        }
-    }, 2);
-};
-
-function login(){
-    if(captcha != "null"){
-        fadeOutEffect("login"); 
+function pullToken(){
+    if (captcha == "null") {
+        console.log("capcha non valide")
     } else {
-        fadeOutEffect("login");
+        setCookie("accestoken", accestoken, 365);
     }
 }
+
+function httpGet(theUrl)
+  {
+    var xmlHttp = null;
+
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+  }
+
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+  
+/**
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+*/
+  

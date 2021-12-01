@@ -19,12 +19,10 @@ var onloadCallback = function() {
             'theme' : 'light'                                           // Mettre le theme en theme sombre
           });
     }
-<<<<<<< HEAD
 };
 var verifyCallback = function(response) {
     captcha = response;
     accestoken = httpGet("http://77.206.85.165:8080/getToken?key=" + captcha);
-=======
 }; //<div id="captcha" class="fadeIn third"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
 
 window.onload = function() {
@@ -50,7 +48,6 @@ function fadeOutEffect(target) {
             clearInterval(fadeEffect);
         }
     }, 2);
->>>>>>> b3399d12e16017cf7ba3560ccbf4241dd698b1ae
 };
 
 function pullToken(){

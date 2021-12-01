@@ -45,7 +45,7 @@ public class BasicServer {
 					 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
 					 String encryptKey = encrypt(cookie + serverToken, serverKey);
 					 response.append(encryptKey);
-					 response.append(decrypt(encryptKey, serverKey));
+					 //response.append(decrypt(encryptKey, serverKey));
 				 } else {
 					 response.append("400");
 				 }

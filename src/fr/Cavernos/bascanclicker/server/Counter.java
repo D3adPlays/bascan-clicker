@@ -16,7 +16,7 @@ public class Counter implements HttpHandler{
 			String cookie = httpExchange.getRemoteAddress().getAddress().toString();
 			String encryptKey = BasicServer.encrypt(cookie + BasicServer.serverToken, BasicServer.serverKey);
 			if(BasicServer.decrypt(encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverToken)){
-				 count = count + 1;  
+				count++;  
 				response.append("File is Writed");
 				@SuppressWarnings("resource")
 				FileWriter counter = new FileWriter("counter.txt");
@@ -25,7 +25,7 @@ public class Counter implements HttpHandler{
 				
 			
 			} else{
-				response.append("200");
+				response.append("400");
 			}
 				
 		 } else {

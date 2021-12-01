@@ -9,6 +9,8 @@ import com.sun.net.httpserver.HttpHandler;
 
 public class Counter implements HttpHandler{
     Integer count = 0;
+    FileWriter counter;
+   
 	public void handle(HttpExchange httpExchange) throws IOException {
 		StringBuilder response = new StringBuilder();
 		Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
@@ -16,10 +18,9 @@ public class Counter implements HttpHandler{
 			String cookie = httpExchange.getRemoteAddress().getAddress().toString();
 			String encryptKey = BasicServer.encrypt(cookie + BasicServer.serverToken, BasicServer.serverKey);
 			if(BasicServer.decrypt(encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverToken)){
-				count++;  
+				count++; 
 				response.append("File is Writed");
-				@SuppressWarnings("resource")
-				FileWriter counter = new FileWriter("counter.txt");
+				counter = new FileWriter("counter.txt");
 				counter.write(count.toString());
 				counter.flush();
 				

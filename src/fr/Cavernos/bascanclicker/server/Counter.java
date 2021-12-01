@@ -12,6 +12,7 @@ public class Counter implements HttpHandler{
     FileWriter counter;
    
 	public void handle(HttpExchange httpExchange) throws IOException {
+		httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin","*");
 		StringBuilder response = new StringBuilder();
 		Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
 		if(JsonReader.main(parms.get("count"))){
@@ -34,6 +35,5 @@ public class Counter implements HttpHandler{
 		 }
 		BasicServer.writeResponse(httpExchange, response.toString());
 	}
-	//window.location.replace("http://localhost:8080/count?count=" + response);
 
 }

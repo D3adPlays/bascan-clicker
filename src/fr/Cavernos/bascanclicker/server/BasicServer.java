@@ -39,6 +39,7 @@ public class BasicServer {
 
 		  static class VerifyCaptcha implements HttpHandler {
 			public void handle(HttpExchange httpExchange) throws IOException {
+				httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin","*");
 				StringBuilder response = new StringBuilder();
 				 Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
 				if(JsonReader.main(parms.get("key"))){

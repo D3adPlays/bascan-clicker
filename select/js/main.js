@@ -1,4 +1,29 @@
-$(".custom-select").each(function() {
+
+// Quand une nouvelle <option> est selectionnée
+window.onload=function(){
+  var selectElem = document.getElementById('select');
+  var pElem = document.getElementById('p');
+  selectElem.addEventListener("click", handler);
+  
+  function handler(){
+    var index = selectElem.selectedIndex;
+  // Rapporter cette donnée au <p>
+  pElem.innerHTML = 'selectedIndex: ' + index;
+  }
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+/**$(".custom-select").each(function() {
     var classes = $(this).attr("class"),
         id      = $(this).attr("id"),
         name    = $(this).attr("name");
@@ -32,4 +57,4 @@ $(".custom-select").each(function() {
     $(this).addClass("selection");
     $(this).parents(".custom-select").removeClass("opened");
     $(this).parents(".custom-select").find(".custom-select-trigger").text($(this).text());
-  });
+  });*/

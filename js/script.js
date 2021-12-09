@@ -20,18 +20,19 @@ var onloadCallback = function() {
           });
     }
 };
+
 var verifyCallback = function(response) {
     captcha = response;
-    accestoken = httpGet("http://77.206.85.165:8080/getToken?key=" + captcha);
+    accestoken = httpGet("http://localhost:8080/getToken?key=" + captcha);
 }; //<div id="captcha" class="fadeIn third"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
 
 window.onload = function() {
-    document.getElementById()
+    //document.getElementById();
 };
 
-var verifyCallback = function(response) {
+/**var verifyCallback = function(response) {
     //window.location.replace("http://localhost:8080/getToken?key=" + response);
-};
+};*/
 
 function replaceContentInContainer(target, source) {
     document.getElementById(target).innerHTML = document.getElementById(source).innerHTML;
@@ -55,6 +56,7 @@ function pullToken(){
         console.log("capcha non valide")
     } else {
         setCookie("accestoken", accestoken, 365);
+        window.location.replace("http://localhost:8000/play/index.html")
     }
 }
 
@@ -75,7 +77,7 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
   
-/**
+
 function getCookie(cname) {
     let name = cname + "=";
     let ca = document.cookie.split(';');
@@ -90,5 +92,5 @@ function getCookie(cname) {
     }
     return "";
 }
-*/
+
   

@@ -1,5 +1,5 @@
 
-var theme = 1;                                                      // Theme sombre=0   Theme clair=1
+var theme = 0;                                                      // Theme sombre=0   Theme clair=1
 
 var captcha = "null";
 var accestoken = "null";                                                     // Deffinition du captcha
@@ -27,7 +27,11 @@ var verifyCallback = function(response) {
 }; //<div id="captcha" class="fadeIn third"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
 
 window.onload = function() {
-    //document.getElementById();
+    if(theme == 0){
+        document.getElementById('tile').style.backgroundColor="#222222"
+        document.getElementById('input').style.backgroundColor="#222222"
+    }
+   
 };
 
 /**var verifyCallback = function(response) {

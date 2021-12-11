@@ -7,7 +7,7 @@
   <meta charset="utf-8">
 </head>
 <body>
-  <div class="tile">
+  <div class="tile" id="tile">
     <div class="tile-header">
       <h2 style="color: rgb(6, 143, 36); opacity: 1; font-size: 4rem; display: flex; justify-content: center; align-items: center; height: 100%;">BASCLICK</h2>
     </div>
@@ -15,7 +15,7 @@
     <div class="tile-body">
       <form id="form">
         <label class="form-input">
-          <input type="text" autofocus="true" required />
+          <input type="text" id="input" autofocus="true" required />
           <span class="label">Pseudo</span>
           <span class="underline"></span>
         </label>
@@ -46,5 +46,6 @@
   </div>
   <script src='js/script.js'></script>
   <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
+  <script type="text/javascript" id="cookieinfo" src="//cookieinfoscript.com/js/cookieinfo.min.js"></script>
 </body>
 </html>

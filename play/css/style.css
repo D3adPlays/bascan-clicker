@@ -10,3 +10,19 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
     min-height: 100vh;
   }
+  
+  #logo{
+    width: 10%;
+  }
+
+  #date{
+    position: absolute;
+    bottom: 0;
+    right: 70px;
+  }
+
+  #time{
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+  }

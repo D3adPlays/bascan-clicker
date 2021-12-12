@@ -11,7 +11,6 @@ function pause(ms)
             document.getElementById('time').innerHTML = time;
             var date = today.getDate()+"-"+(today.getMonth()+1)+'-'+today.getFullYear(); 
             document.getElementById('date').innerHTML = date;
-            
         }
     }
     affichertime()

@@ -70,10 +70,9 @@ function getCookie(cname) {
   }
   return "";
 }
-var classe = "null";
 function checkCookie(){
-  let classe = getCookie("classe");
-  if(classe ==""){
+  classe = getCookie('classe')
+  if(classe==""){
     console.log("Seclectionnez un choix")
   } else{
     window.location.replace('../play/')

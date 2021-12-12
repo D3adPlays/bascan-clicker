@@ -26,8 +26,7 @@ var verifyCallback = function(response) {
     accestoken = httpGet("http://localhost:8080/getToken?key=" + captcha);
 }; //<div id="captcha" class="fadeIn third"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
 
-window.onload = function() {
-    function pause(ms) 
+function pause(ms) 
 {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -49,24 +48,22 @@ window.onload = function() {
         document.getElementById('tile').style.backgroundColor="#222222"
         document.getElementById('input').style.backgroundColor="#222222"
     }
-   
-};
 
-/**var verifyCallback = function(response) {
-    //window.location.replace("http://localhost:8080/getToken?key=" + response);
-};*/
 
 function replaceContentInContainer(target, source) {
-    document.getElementById(target).innerHTML = document.getElementById(source).innerHTML;
+    window.location = source;
+    document.getElementById(target).innerHTML = source;
 };
 function fadeOutEffect(target) {
     var fadeTarget = document.getElementById(target);
-    var fadeEffect = setInterval(function () {
+    var fadeEffect = setInterval(async function () {
         if (!fadeTarget.style.opacity) {
             fadeTarget.style.opacity = 1;
         }
         if (fadeTarget.style.opacity > 0) {
             fadeTarget.style.opacity -= 0.01;
+            await pause(100)
+            window.location.replace("http://localhost:8000/select/index.html")
         } else {
             clearInterval(fadeEffect);
         }
@@ -78,7 +75,7 @@ function pullToken(){
         console.log("capcha non valide")
     } else {
         setCookie("accestoken", accestoken, 365);
-        window.location.replace("http://localhost:8000/select/index.html")
+        fadeOutEffect("tile")
     }
 }
 

@@ -34,16 +34,20 @@ selectElem.addEventListener("click", handler);
 
 function handler(){
   var index = selectElem.selectedIndex;
-  if(index==0){
-    setCookie("classe", index, 365)
-  }
   if(index==1){
+    index = "Seconde";
     setCookie("classe", index, 365)
   }
   if(index==2){
+    index = "Première";
     setCookie("classe", index, 365)
   }
   if(index==3){
+    index = "Terminales";
+    setCookie("classe", index, 365)
+  }
+  if(index==4){
+    index = "Technologique";
     setCookie("classe", index, 365)
   }
 }

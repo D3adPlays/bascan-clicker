@@ -13,6 +13,8 @@ body {
   
   #logo{
     width: 10%;
+    background: 0;
+    border: 0;
   }
 
   #date{

@@ -5,18 +5,25 @@
     <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
     <link rel="icon" href="../img/logo.png">
     <meta charset="utf-8">
-    <script src='js/main.js'></script>
 </head>
 <body>
     <div class="center">
       <p id="p">selectedIndex: 0</p>
 
       <select id="select">
-        <option selected>Seconde</option>
+        <option selected></option>
+        <option>Seconde</option>
         <option>Première</option>
         <option>Terminale</option>
         <option>Technologique</option>
       </select>
-      </div>
+    </div>        
+      <div id="submit" role="button" type="button" class="btn btn-irenic float-right" tabindex="0" onclick="checkCookie()" disabled>
+        <span>Continuer
+        </span>
+    </div>
+    <div id="date"></div>
+    <div id="time"></div>
+    <script src='js/main.js'></script>
 </body>
 </html>

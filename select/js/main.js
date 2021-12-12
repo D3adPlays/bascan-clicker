@@ -1,6 +1,23 @@
-
 // Quand une nouvelle <option> est selectionnée
 window.onload=function(){
+  function pause(ms) 
+{
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+    async function affichertime(){
+        while(true){
+            await pause(1000);
+            var today =new Date();
+            var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+            document.getElementById('time').innerHTML = time;
+            var date = today.getDate()+"-"+(today.getMonth()+1)+'-'+today.getFullYear(); 
+            document.getElementById('date').innerHTML = date;
+            
+        }
+    }
+    affichertime()
+   
+    
   var selectElem = document.getElementById('select');
   var pElem = document.getElementById('p');
   selectElem.addEventListener("click", handler);
@@ -10,9 +27,59 @@ window.onload=function(){
   // Rapporter cette donnée au <p>
   pElem.innerHTML = 'selectedIndex: ' + index;
   }
-  
-
 }
+
+var selectElem = document.getElementById('select');
+selectElem.addEventListener("click", handler);
+
+function handler(){
+  var index = selectElem.selectedIndex;
+  if(index==0){
+    setCookie("classe", index, 365)
+  }
+  if(index==1){
+    setCookie("classe", index, 365)
+  }
+  if(index==2){
+    setCookie("classe", index, 365)
+  }
+  if(index==3){
+    setCookie("classe", index, 365)
+  }
+}
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  let expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+var classe = "null";
+function checkCookie(){
+  let classe = getCookie("classe");
+  if(classe ==""){
+    console.log("Seclectionnez un choix")
+  } else{
+    window.location.replace('../play/')
+  }
+}
+
 
 
 

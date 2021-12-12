@@ -27,6 +27,24 @@ var verifyCallback = function(response) {
 }; //<div id="captcha" class="fadeIn third"><form action="javascript:alert(grecaptcha.getResponse(widgetId1));"></form></div>
 
 window.onload = function() {
+    function pause(ms) 
+{
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+    async function affichertime(){
+        while(true){
+            await pause(1000);
+            var today =new Date();
+            var time = today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+            document.getElementById('time').innerHTML = time;
+            var date = today.getDate()+"-"+(today.getMonth()+1)+'-'+today.getFullYear(); 
+            document.getElementById('date').innerHTML = date;
+            
+        }
+    }
+    affichertime()
+   
+    
     if(theme == 0){
         document.getElementById('tile').style.backgroundColor="#222222"
         document.getElementById('input').style.backgroundColor="#222222"
@@ -60,7 +78,7 @@ function pullToken(){
         console.log("capcha non valide")
     } else {
         setCookie("accestoken", accestoken, 365);
-        window.location.replace("http://localhost:8000/play/index.html")
+        window.location.replace("http://localhost:8000/select/index.html")
     }
 }
 

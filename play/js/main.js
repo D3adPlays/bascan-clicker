@@ -18,6 +18,33 @@ function pause(ms)
    
     
 }
+function count(){
+    console.log(getCookie('accestoken'))
+    httpGet("http://localhost:8080/count?count=" + getCookie('accestoken'));
+}
+function httpGet(theUrl)
+  {
+    var xmlHttp = null;
 
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+  }
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
 
    

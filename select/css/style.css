@@ -130,4 +130,25 @@ body {
   .custom-option.selection {
     background: #f9f9f9;
   }
+
+  #date{
+    position: absolute;
+    bottom: 0;
+    right: 70px;
+  }
+
+  #time{
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+  }
+  #submit{
+    width: 110px;
+    text-align: center;
+    border-radius: 4px;
+    background-color: #07beb8;
+    opacity: 1;
+    position: relative;
+    bottom: -50px;
+  }
   

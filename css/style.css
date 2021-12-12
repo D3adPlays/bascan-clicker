@@ -304,3 +304,15 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-transform: scale(1);
   }
 }
+
+#date{
+  position: absolute;
+  bottom: 0;
+  right: 70px;
+}
+
+#time{
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+}

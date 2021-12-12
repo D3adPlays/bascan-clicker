@@ -25,6 +25,7 @@ public class BasicServer {
 	public static final String serverToken = UUID.randomUUID().toString();
 	public static SecretKeySpec secretKey;
 	public static final String ALGORITHM = "AES";
+	public static String encryptKey;
 
 
 	  public static void main(String[] args) throws Exception {
@@ -36,7 +37,6 @@ public class BasicServer {
 		    server.start();
 		    System.out.println("The server is running");
 		  }
-
 		  static class VerifyCaptcha implements HttpHandler {
 			public void handle(HttpExchange httpExchange) throws IOException {
 				httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin","*");
@@ -44,7 +44,7 @@ public class BasicServer {
 				 Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
 				if(JsonReader.main(parms.get("key"))){
 					 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
-					 String encryptKey = encrypt(cookie + serverToken, serverKey);
+					 encryptKey = encrypt(cookie + serverToken, serverKey);
 					 response.append(encryptKey);
 					 //response.append(decrypt(encryptKey, serverKey));
 				 } else {

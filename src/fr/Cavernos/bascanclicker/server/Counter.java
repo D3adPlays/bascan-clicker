@@ -10,15 +10,14 @@ import com.sun.net.httpserver.HttpHandler;
 public class Counter implements HttpHandler{
     Integer count = 0;
     FileWriter counter;
-   
+
 	public void handle(HttpExchange httpExchange) throws IOException {
 		httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin","*");
 		StringBuilder response = new StringBuilder();
 		Map <String,String>parms = BasicServer.queryToMap(httpExchange.getRequestURI().getQuery());
-		if(JsonReader.main(parms.get("count"))){
+		if(JsonReader.main(parms.get("count"))+ BasicServer.encryptKey != null){
 			String cookie = httpExchange.getRemoteAddress().getAddress().toString();
-			String encryptKey = BasicServer.encrypt(cookie + BasicServer.serverToken, BasicServer.serverKey);
-			if(BasicServer.decrypt(encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverToken)){
+			if(BasicServer.decrypt(BasicServer.encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverToken)){
 				count++; 
 				response.append("File is Writed");
 				counter = new FileWriter("counter.txt");
@@ -30,8 +29,6 @@ public class Counter implements HttpHandler{
 				response.append("400");
 			}
 				
-		 } else {
-			 response.append("400");
 		 }
 		BasicServer.writeResponse(httpExchange, response.toString());
 	}

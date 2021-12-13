@@ -9,9 +9,13 @@ import com.sun.net.httpserver.HttpHandler;
 
 public class Counter implements HttpHandler{
     Integer count = 0;
+    Integer countSeconde = 0;
+    Integer countPremière = 0;
+    Integer countTerminale = 0;
     FileWriter counter;
-
-	@SuppressWarnings("unused")
+    FileWriter counterSeconde;
+    FileWriter counterPremière;
+    FileWriter counterTerminale;
 	public void handle(HttpExchange httpExchange) throws IOException {
 		httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin","*");
 		StringBuilder response = new StringBuilder();
@@ -30,41 +34,44 @@ public class Counter implements HttpHandler{
 				response.append("400");
 			}
 				
-		 } else if (JsonReader.main(parms.get("seconde"))+ BasicServer.encryptKey != null){
+		 } 
+		if (JsonReader.main(parms.get("seconde"))+ BasicServer.encryptKey != null){
 			 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
 				if(BasicServer.decrypt(BasicServer.encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverToken)){
-					count++; 
+					countSeconde++; 
 					response.append("File is Writed");
-					counter = new FileWriter("counterSeconde.txt");
-					counter.write(count.toString());
-					counter.flush();
+					counterSeconde = new FileWriter("counterSeconde.txt");
+					counterSeconde.write(count.toString());
+					counterSeconde.flush();
 					
 				
 				} else{
 					response.append("400");
 				}
-		 } else if(JsonReader.main(parms.get("première"))+ BasicServer.encryptKey != null){
+		 }
+		if(JsonReader.main(parms.get("première"))+ BasicServer.encryptKey != null){
 			 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
 				if(BasicServer.decrypt(BasicServer.encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverToken)){
-					count++; 
+					countPremière++; 
 					response.append("File is Writed");
-					counter = new FileWriter("counterPremière.txt");
-					counter.write(count.toString());
-					counter.flush();
+					counterPremière = new FileWriter("counterPremière.txt");
+					counterPremière.write(count.toString());
+					counterPremière.flush();
 					
 				
 				} else{
 					response.append("400");
 				}
 			 
-		 }	else if(JsonReader.main(parms.get("terminale"))+ BasicServer.encryptKey != null){
+		 }
+		if(JsonReader.main(parms.get("terminale"))+ BasicServer.encryptKey != null){
 			 String cookie = httpExchange.getRemoteAddress().getAddress().toString();
 				if(BasicServer.decrypt(BasicServer.encryptKey, BasicServer.serverKey).equals(cookie + BasicServer.serverToken)){
-					count++; 
+					countTerminale++; 
 					response.append("File is Writed");
-					counter = new FileWriter("counterTerminale.txt");
-					counter.write(count.toString());
-					counter.flush();
+					counterTerminale = new FileWriter("counterTerminale.txt");
+					counterTerminale.write(count.toString());
+					counterTerminale.flush();
 					
 				
 				} else{

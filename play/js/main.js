@@ -18,8 +18,11 @@ function pause(ms)
     
 }
 function count(){
-    console.log(getCookie('accestoken'))
-    httpGet("http://localhost:8080/count?count=" + getCookie('accestoken'));
+  console.log(getCookie('classe'))
+  if (getCookie('classe') == 'Seconde'){
+    httpGet("http://localhost:8080/count?seconde=" + getCookie('accestoken'));
+  }
+    
 }
 function httpGet(theUrl)
   {
